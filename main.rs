@@ -90,7 +90,7 @@ fn update(app: &App, model: &mut Model, _update: Update) {
         let random_down_speed: f32 = random_range(0.1, 51.0);
         if plot.x >= 0.0 || plot.x <= 0.0 || plot.x == 0.0 {
             plot.x = plot.x + random_offset;
-            if plot.x >= 600.0 {
+            if plot.x >= 1000.0 {
                 plot.x = 0.0 + random_offset;
             }
         }
