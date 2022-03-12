@@ -17,7 +17,7 @@ struct Model {
 
 fn generate_land_plot() -> Plot {
     let random_x_range = random_range(-500.0, 500.0);
-    let random_y_range = random_range(-500.0, 500.0);
+    let random_y_range = random_range(200.0, 500.0);
 
     Plot {x: random_x_range, y: random_y_range }
 
@@ -51,7 +51,8 @@ fn init(app: &App) -> Model {
 }
 
 fn view(app: &App, model: &Model, frame: Frame) {
-    //let random_offet = random_range(-250.0, 250.0);
+    let random_y_len: f32 = random_range(14.0, 26.0);
+
     
 
     
@@ -70,7 +71,7 @@ fn view(app: &App, model: &Model, frame: Frame) {
     for plot in model.land.iter() {
         draw
         .rect()
-        .w_h(2.0, 17.0)
+        .w_h(2.0, random_y_len)
         .x(plot.x)
         .y(plot.y)
         .color(ORCHID);
@@ -86,7 +87,7 @@ fn update(app: &App, model: &mut Model, _update: Update) {
 
     for plot in model.land.iter_mut() {
         let random_offset: f32 = random_range(-500.0, 500.0);
-        let random_down_speed: f32 = random_range(0.5, 50.0);
+        let random_down_speed: f32 = random_range(0.1, 51.0);
         if plot.x >= 0.0 || plot.x <= 0.0 || plot.x == 0.0 {
             plot.x = plot.x + random_offset;
             if plot.x >= 600.0 {
@@ -96,8 +97,16 @@ fn update(app: &App, model: &mut Model, _update: Update) {
 
         plot.y = plot.y - random_down_speed;
 
+        if plot.y <= 200.0 {
+            plot.y = plot.y - random_down_speed + 15.0;
+        } else {
+            plot.y = plot.y - random_down_speed + 20.0;
+        }
+
+
         if plot.y <= -500.0 {
             plot.y = 500.0;
+            
         }
        
     }
